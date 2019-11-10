@@ -4,6 +4,7 @@
 {%block content %}
 <div id="content">
     <h2>{{ object.title }}</h2>
+<!--    <h2>test111</h2>-->
     <p class="other_posts">
         {% if object.get_previous_by_modify_date %}
         <a href="{{ object.get_previous_post.get_absolute_url }}" title="View previous post">
@@ -17,6 +18,15 @@
 
     <div class="body">
         {{ object.content|linebreaks }}
+    </div>
+    <div>
+        <b>TAGES: </b>
+        {% load tagging_tags %}
+        {% tags_for_object object as tags %}
+        {% for tag in tags %}
+        <a href="{% url 'blog:tagged_object_list' tag.name %}">{{tag.name}}</a>
+        {% endfor %}
+        <a href="{% url 'blog:tag_cloud' %}"><i>[ TagCloud ]</i></a>
     </div>
 </div>
 {% endblock %}

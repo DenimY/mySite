@@ -1,12 +1,32 @@
-from django.shortcuts import render
+# from django.shortcuts import render
 
 # Create your views here.
 from django.views.generic import ListView, ArchiveIndexView, YearArchiveView, MonthArchiveView, DayArchiveView, \
-    TodayArchiveView, DetailView
+    TodayArchiveView, DetailView, TemplateView
+from tagging.views import TaggedObjectList
 
 from blog.models import Post
 
 
+# --- TemplateView
+class TagTV(TemplateView):
+    template_name = 'tagging/tagging_cloud.html'
+
+
+# --- ListView
+class PostLV(ListView):
+    model = Post
+    template_name = 'blog/post_all.html'
+    context_object_name = 'posts'
+    paginate_by = 2
+
+
+class PostTOL(TaggedObjectList):
+    model = Post
+    template_name = 'tagging/tagging_post_list.html'
+
+
+# --- DetailView
 class PostLV(ListView):
     model = Post
     template_name = 'blog/post_all.html'
