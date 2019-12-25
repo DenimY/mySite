@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from blog.views import PostLV, PostAV, PostYAV, PostMAV, PostDAV, PostTAV, PostDV, TagTV, PostTOL
+from blog.views import PostLV, PostAV, PostYAV, PostMAV, PostDAV, PostTAV, PostDV, TagTV, PostTOL, SearchFormView
 
 app_name = 'blog'
 urlpatterns = [
@@ -27,6 +27,9 @@ urlpatterns = [
 
     #Example: /tag/tagname/
     url(r'^tag/(?P<tag>[^/]+(?u))/$', PostTOL.as_view(), name='tagged_object_list'),
+
+    #Example: /tag/search/
+    url(r'^search/$', SearchFormView.as_view(), name='search'),
 
 
 ]

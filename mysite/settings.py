@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = 'ecrcof7xo=n1o^j%#nn(5p_l&pztzi^4t+vz2kjc!4x-x%b5lq'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -40,9 +38,15 @@ INSTALLED_APPS = [
     'bookmark.apps.BookmarkConfig',
     'blog.apps.BlogConfig',
     'testStartApp.apps.TeststartappConfig',
-    'tagging.apps.TaggingConfig'
+    'tagging.apps.TaggingConfig',
+    'disqus',
+    'django.contrib.sites',
+    'photo.apps.PhotoConfig',
 
 ]
+
+DISQUS_WEBSITE_SHORTNAME = 'python-web-programming-0nz2zuiq33'
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -74,7 +78,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
@@ -84,7 +87,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -119,9 +121,17 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] #/home/shkim/pyDjango/mysite/static
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # /home/shkim/pyDjango/mysite/static
+
+# PHOTO
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# login, logout url은 예제에서 사용하는 url과 동일하므로 지정하지 않아도 된다
+# LOGIN_URL = '/accounts/login/'
+# LOGOUT_URL = '/accounts/logout/'
+LOGIN_REDIRECT_URL = '/'
