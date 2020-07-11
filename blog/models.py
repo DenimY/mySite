@@ -1,10 +1,15 @@
 from __future__ import unicode_literals
 
+from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils.encoding import python_2_unicode_compatible
 
 from django.db import models
+from django.utils.text import slugify
 from tagging.fields import TagField
+
+# from django.contrib.auth.models import User
+# from django.utils.text import slugify
 
 # Create your models here.
 
@@ -16,7 +21,8 @@ class Post(models.Model):
     content = models.TextField('CONTENT')
     create_date = models.DateTimeField('Create Date', auto_now_add=True)
     modify_date = models.DateTimeField('Modify Date', auto_now=True)
-    tag = TagField() 
+    tag = TagField()
+    owner = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'post'
@@ -35,3 +41,8 @@ class Post(models.Model):
 
     def get_next_post(self):
         return self.get_next_by_modify_date()
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify(self.title, allow_unicode=True)
+        super(Post, self).save(*args, **kwargs)

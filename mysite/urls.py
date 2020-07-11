@@ -22,12 +22,19 @@ from django.contrib import admin
 
 # from bookmark.views import BookmarkLV, BookmarkDV
 from mysite.view import HomeView
+from mysite.view import UserCreateView, UserCreateDoneTV
 
 urlpatterns = [
                   # path('admin/', admin.site.urls),
                   url(r'admin/', admin.site.urls),
                   # Admin 사이트에 대한 URLconf인 admin.site.urls를 재활용할 때는
                   # 예외적으로 include()를 사용하지 않아도 가능하다.
+
+                  # 인증 URL
+                  url(r'^accounts/', include('django.contrib.auth.urls')),
+                  url(r'^accounts/register/&', UserCreateView.as_view(), name='register'),
+                  url(r'^accounts/register/done/&', UserCreateDoneTV.as_view(), name='register_done'),
+
                   # url(r'^admin/', admin.site.urls),
                   # url(r'^bookmark/', include('bookmark.urls', namespace='bookmark')),
                   url(r'bookmark/', include('bookmark.urls', namespace='bookmark')),
@@ -41,7 +48,7 @@ urlpatterns = [
                   # url(r'^bookmark/(?P<pk>\d+)/$', BookmarkDV.as_view(), name='detail'),
 
                   #
-                  url(r'^blog/', include('blog.urls'), name='blog'),
+                  # url(r'^blog/', include('blog.urls'), name='blog'),
                   # photo
                   url(r'^photo/', include('photo.urls'), name='photo'),
 
