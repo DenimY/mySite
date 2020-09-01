@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from blog.views import PostLV, PostAV, PostYAV, PostMAV, PostDAV, PostTAV, PostDV, TagTV, PostTOL, SearchFormView
+from blog.views import PostLV, PostAV, PostYAV, PostMAV, PostDAV, PostTAV, PostDV, TagTV, PostTOL, SearchFormView, PostCreateView, PostChangeLV, PostUpdateView, PostDeleteView
 
 app_name = 'blog'
 urlpatterns = [
@@ -33,8 +33,8 @@ urlpatterns = [
 
     #
     url(r'^add/$', PostCreateView.as_view(), name='add'),
-    url(r'^change/$', PostCreateView.as_view(), name='change'),
-    url(r'^(?P<pk>[0-9]+)/update/$', PostCreateView.as_view(), name='update'),
+    url(r'^change/$', PostChangeLV.as_view(), name='change'),
+    url(r'^(?P<pk>[0-9]+)/update/$', PostUpdateView.as_view(), name='update'),
     url(r'^(?P<pk>[0-9]+)/delete/$', PostDeleteView.as_view(), name='delete'),
 
 

@@ -131,4 +131,3 @@ class LoginRequiredMax(object):
         view = super(LoginRequiredMax, cls).as_view(**initkwargs)
         return login_required(view)
 
-
